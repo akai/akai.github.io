@@ -63,7 +63,7 @@ github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:
+twitter_user: akai404
 twitter_tweet_count: 4
 twitter_show_replies: false
 twitter_follow_button: true
@@ -88,7 +88,7 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
+disqus_short_name: akai404
 disqus_show_comment_count: false
 
 # Google Analytics
