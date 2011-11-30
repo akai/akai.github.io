@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>#akai</title>
+  <title>用 rbenv 来管理 Ruby 的安装 - #akai</title>
   <meta name="author" content="akai">
 
   
-  <meta name="description" content="Run software update Form Mac App Store download &amp; install XCode Install Homebrew 1
-/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.github.com/ &hellip;">
+  <meta name="description" content="如果你 Ruby 开发者，应该知道用 RVM 来安装/管理 Ruby 版本，同时也能用它的 gemset 功能来管理各个工程的 gems。 最近，37Signals 的 Sam Stephenson 也创建了一个类似的软件，叫做 rbenv。不过它功能非常简单，简单到只是用来管理 Ruby 版本， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akai.github.com">
+  <link rel="canonical" href="http://akai.github.com/blog/rbenv">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -59,116 +58,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/bootstrap/">Installing Rails on Mac OS X</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-09-10T14:47:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ol>
-    <li>
-        <p>Run software update</p>
-    </li>
-    <li>
-        <p>Form Mac App Store download &amp; install <a href="http://itunes.apple.com/us/app/xcode/id448457090?mt=12">XCode</a></p>
-    </li>
-    <li>
-        <p>Install Homebrew</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>/usr/bin/ruby -e <span class="s2">&quot;$(curl -fsSL https://raw.github.com/gist/323731)&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-    </li>
-    <li>
-        <p>Install Git</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install git
-</span></code></pre></td></tr></table></div></figure>
-
-    </li>
-    <li>
-        <p>Install rbenv &amp; ruby-build</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install rbenv
-</span><span class='line'>brew install ruby-build
-</span></code></pre></td></tr></table></div></figure>
-
-    </li>
-    <li>
-        <p>Install Ruby</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rbenv install 1.9.2-p290
-</span><span class='line'>rbenv global 1.9.2-p290
-</span></code></pre></td></tr></table></div></figure>
-
-    </li>
-    <li>
-        <p>Install MySQL</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install mysql
-</span></code></pre></td></tr></table></div></figure>
-
-    </li>
-    <li>
-        <p>Install Rails</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem install rails --no-rdoc --no-ri
-</span></code></pre></td></tr></table></div></figure>
-
-    </li>
-    <li>
-        <p>Enjoy!</p>
-    </li>
-</ol>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/rbenv/">用 Rbenv 来管理 Ruby 的安装</a></h1>
+      <h1 class="entry-title">用 Rbenv 来管理 Ruby 的安装</h1>
     
     
       <p class="meta">
@@ -191,7 +86,7 @@
   </header>
 
 
-  <div class="entry-content"><p>如果你 Ruby 开发者，应该知道用 <a href="http://beginrescueend.com/">RVM</a> 来安装/管理 Ruby 版本，同时也能用它的 gemset 功能来管理各个工程的 gems。</p>
+<div class="entry-content"><p>如果你 Ruby 开发者，应该知道用 <a href="http://beginrescueend.com/">RVM</a> 来安装/管理 Ruby 版本，同时也能用它的 gemset 功能来管理各个工程的 gems。</p>
 
 <p>最近，<a href="http://37signals.com">37Signals</a> 的 <a href="http://sstephenson.us/">Sam Stephenson</a> 也创建了一个类似的软件，叫做 <a href="https://github.com/sstephenson/rbenv">rbenv</a>。不过它功能非常简单，简单到只是用来管理 Ruby 版本，连安装的功能也没提供。</p>
 
@@ -333,18 +228,65 @@
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">akai</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2011-08-22T10:43:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2011</time>
+      
+
+<span class="categories">
   
-  <div class="pagination">
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
     
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akai.github.com/blog/rbenv/" data-via="akai404" data-counturl="http://akai.github.com/blog/rbenv/" >Tweet</a>
+  
+  
+  
 </div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/bootstrap/" title="next Post: Installing Rails on  Mac OS X">Installing Rails on  Mac OS X &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -366,7 +308,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -386,6 +328,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -400,7 +343,10 @@
       var disqus_shortname = 'akai404';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://akai.github.com/blog/rbenv/';
+        var disqus_url = 'http://akai.github.com/blog/rbenv/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

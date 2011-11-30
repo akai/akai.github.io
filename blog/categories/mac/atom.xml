@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mac | #akai]]></title>
+  <link href="http://akai.github.com/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://akai.github.com/"/>
+  <updated>2011-11-30T20:25:38+08:00</updated>
+  <id>http://akai.github.com/</id>
+  <author>
+    <name><![CDATA[akai]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Installing Rails on  Mac OS X]]></title>
+    <link href="http://akai.github.com/blog/bootstrap/"/>
+    <updated>2011-09-10T14:47:00+08:00</updated>
+    <id>http://akai.github.com/blog/bootstrap</id>
+    <content type="html"><![CDATA[<ol>
+    <li>
+        <p>Run software update</p>
+    </li>
+    <li>
+        <p>Form Mac App Store download &amp; install <a href="http://itunes.apple.com/us/app/xcode/id448457090?mt=12">XCode</a></p>
+    </li>
+    <li>
+        <p>Install Homebrew</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/usr/bin/ruby -e <span class="s2">&quot;$(curl -fsSL https://raw.github.com/gist/323731)&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+    </li>
+    <li>
+        <p>Install Git</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install git
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+    </li>
+    <li>
+        <p>Install rbenv &amp; ruby-build</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install rbenv
+</span><span class='line'>brew install ruby-build
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+    </li>
+    <li>
+        <p>Install Ruby</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rbenv install 1.9.2-p290
+</span><span class='line'>rbenv global 1.9.2-p290
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+    </li>
+    <li>
+        <p>Install MySQL</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install mysql
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+    </li>
+    <li>
+        <p>Install Rails</p>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem install rails --no-rdoc --no-ri
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+    </li>
+    <li>
+        <p>Enjoy!</p>
+    </li>
+</ol>
+
+
+
+]]></content>
+  </entry>
+  
+</feed>

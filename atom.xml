@@ -1,96 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>#akai</title>
-  <meta name="author" content="akai">
-
-  
-  <meta name="description" content="Run software update Form Mac App Store download &amp; install XCode Install Homebrew 1
-/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.github.com/ &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://akai.github.com">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="#akai" type="application/atom+xml">
-  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
-<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-
-  
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">#akai</a></h1>
-  <h2><span class="p">float</span><span class="v">cloud</span></h2>
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:akai.github.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-<ul role=main-navigation>
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[#akai]]></title>
+  <link href="http://akai.github.com/atom.xml" rel="self"/>
+  <link href="http://akai.github.com/"/>
+  <updated>2011-11-30T20:25:38+08:00</updated>
+  <id>http://akai.github.com/</id>
+  <author>
+    <name><![CDATA[akai]]></name>
     
-      <h1 class="entry-title"><a href="/blog/bootstrap/">Installing Rails on Mac OS X</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2011-09-10T14:47:00+08:00" pubdate data-updated="true">Sep 10<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ol>
+  <entry>
+    <title type="html"><![CDATA[Installing Rails on  Mac OS X]]></title>
+    <link href="http://akai.github.com/blog/bootstrap/"/>
+    <updated>2011-09-10T14:47:00+08:00</updated>
+    <id>http://akai.github.com/blog/bootstrap</id>
+    <content type="html"><![CDATA[<ol>
     <li>
         <p>Run software update</p>
     </li>
@@ -156,42 +84,15 @@
 
 
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/rbenv/">用 Rbenv 来管理 Ruby 的安装</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-22T10:43:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>如果你 Ruby 开发者，应该知道用 <a href="http://beginrescueend.com/">RVM</a> 来安装/管理 Ruby 版本，同时也能用它的 gemset 功能来管理各个工程的 gems。</p>
+  <entry>
+    <title type="html"><![CDATA[用 rbenv 来管理 Ruby 的安装]]></title>
+    <link href="http://akai.github.com/blog/rbenv/"/>
+    <updated>2011-08-22T10:43:00+08:00</updated>
+    <id>http://akai.github.com/blog/rbenv</id>
+    <content type="html"><![CDATA[<p>如果你 Ruby 开发者，应该知道用 <a href="http://beginrescueend.com/">RVM</a> 来安装/管理 Ruby 版本，同时也能用它的 gemset 功能来管理各个工程的 gems。</p>
 
 <p>最近，<a href="http://37signals.com">37Signals</a> 的 <a href="http://sstephenson.us/">Sam Stephenson</a> 也创建了一个类似的软件，叫做 <a href="https://github.com/sstephenson/rbenv">rbenv</a>。不过它功能非常简单，简单到只是用来管理 Ruby 版本，连安装的功能也没提供。</p>
 
@@ -332,102 +233,7 @@
 </span><span class='line'>brew install ruby-build
 </span></code></pre></td></tr></table></div></figure>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/bootstrap/">Installing Rails on  Mac OS X</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/rbenv/">用 rbenv 来管理 Ruby 的安装</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("akai404", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/akai404" class="twitter-follow-button" data-width="208px" data-show-count="false">Follow @akai404</a>
-  
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2011 - akai -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'akai404';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>

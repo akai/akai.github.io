@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://akai.github.com/blog/rbenv/</loc>
+        <lastmod>2011-11-22T15:29:03+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://akai.github.com/blog/bootstrap/</loc>
+        <lastmod>2011-11-30T17:08:33+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://akai.github.com/blog/archives/</loc>
+        <lastmod>2011-11-30T17:08:33+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://akai.github.com/</loc>
+        <lastmod>2011-11-30T17:08:33+08:00</lastmod>
+    </url>
+</urlset>
