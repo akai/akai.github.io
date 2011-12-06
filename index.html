@@ -9,8 +9,7 @@
   <meta name="author" content="akai">
 
   
-  <meta name="description" content="Run software update Form Mac App Store download &amp; install XCode Install Homebrew 1
-/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.github.com/ &hellip;">
+  <meta name="description" content="Writing code that’s expressive, encapsulated &amp; structured 1. Module Pattern Interchangeable single-parts of a larger system that can be easily re &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -61,6 +60,485 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/js-patterns/">JavaScript Design Patterns</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-12-01T14:16:00+08:00" pubdate data-updated="true">Dec 1<span>st</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Writing code that’s expressive, encapsulated &amp; structured</p>
+
+<h2>1. Module Pattern</h2>
+
+<p>Interchangeable single-parts of a larger system that can be easily re-used.</p>
+
+<h3>Stepping stone: IIFE</h3>
+
+<p>Immediately invoked function expressions (or self-executing anonymous functions)</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// code to be immediately invoked</span>
+</span><span class='line'><span class="p">}());</span> <span class="c1">// Crockford recommends this way</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// code to be immediately invoked</span>
+</span><span class='line'><span class="p">})();</span> <span class="c1">// This is just as valid</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="nb">document</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//code to be immediately invoked</span>
+</span><span class='line'><span class="p">})(</span><span class="k">this</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nb">document</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">global</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//code to be immediately invoked</span>
+</span><span class='line'><span class="p">})(</span><span class="k">this</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Simulate privacy</h3>
+
+<p>The typical module pattern is where immediately invoked function expressions (IIFEs) use <strong>execution context</strong> to create ‘privacy’. Here, <strong>objects</strong> are returned instead of functions.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">basketModule</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">basket</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">//private</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span> <span class="c1">//exposed to public</span>
+</span><span class='line'>        <span class="nx">addItem</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">values</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">basket</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">getItemCount</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">return</span> <span class="nx">basket</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">getTotal</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">q</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getItemCount</span><span class="p">(),</span> <span class="nx">p</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>            <span class="k">while</span> <span class="p">(</span><span class="nx">q</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">p</span> <span class="o">+=</span> <span class="nx">basket</span><span class="p">[</span><span class="nx">q</span><span class="p">].</span><span class="nx">price</span><span class="p">;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="k">return</span> <span class="nx">p</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>In the pattern, variables declared are only available inside the module.</li>
+<li>Variables de ned within the returning object are available to everyone</li>
+<li>This allows us to simulate privacy</li>
+</ul>
+
+
+<h3>Sample usage</h3>
+
+<p>Inside the module, you&#8217;ll notice we return an object. This gets automatically assigned to basketModule so that you can interact with it as follows:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">//basketModule is an object with properties which can also be methodsbas</span>
+</span><span class='line'><span class="nx">basketModule</span><span class="p">.</span><span class="nx">addItem</span><span class="p">({</span><span class="nx">item</span><span class="o">:</span> <span class="s1">&#39;bread&#39;</span><span class="p">,</span><span class="nx">price</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">});</span>
+</span><span class='line'><span class="nx">basketModule</span><span class="p">.</span><span class="nx">addItem</span><span class="p">({</span><span class="nx">item</span><span class="o">:</span> <span class="s1">&#39;butter&#39;</span><span class="p">,</span><span class="nx">price</span><span class="o">:</span> <span class="mf">0.3</span><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">basketModule</span><span class="p">.</span><span class="nx">getItemCount</span><span class="p">());</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">basketModule</span><span class="p">.</span><span class="nx">getTotal</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//however, the following will not work:</span>
+</span><span class='line'><span class="c1">// (undefined as not inside the returned object)</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">basketModule</span><span class="p">.</span><span class="nx">basket</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//(only exists within the module scope)</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">basket</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Module Pattern: jQuery</h3>
+
+<p>In the following example, a <strong>library</strong> function is defined which declares a new library and automatically binds up the <strong>init</strong> function to document.ready when new libraries (ie. modules) are created.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">function</span> <span class="nx">library</span><span class="p">(</span><span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">module</span><span class="p">.</span><span class="nx">init</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">module</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">module</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">myLibrary</span> <span class="o">=</span> <span class="nx">library</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="cm">/*implementation*/</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'><span class="p">}());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>AMD + jQuery</h3>
+
+<p>A very simple AMD module using jQuery and the color plugin</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">define</span><span class="p">([</span><span class="s2">&quot;jquery&quot;</span><span class="p">,</span> <span class="s2">&quot;jquery.color&quot;</span><span class="p">,</span> <span class="s2">&quot;jquery.bounce&quot;</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">//the jquery.color and jquery.bounce plugins have been loaded</span>
+</span><span class='line'>    <span class="c1">// not exposed to other modules</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#container&#39;</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">.</span><span class="nx">animate</span><span class="p">({</span><span class="s1">&#39;backgroundColor&#39;</span><span class="o">:</span> <span class="s1">&#39;#ccc&#39;</span><span class="p">},</span> <span class="mi">500</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">.</span><span class="nx">bounce</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="c1">// exposed to other modules</span>
+</span><span class='line'>    <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// your modules functionality</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>AMD/UMD jQuery Plugin</h3>
+
+<p><strong>Recommended</strong> by Require.js author James Burke</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">root</span><span class="p">,</span> <span class="nx">factory</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">exports</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Node/CommonJS</span>
+</span><span class='line'>        <span class="nx">factory</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;jquery&#39;</span><span class="p">));</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">define</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">define</span><span class="p">.</span><span class="nx">amd</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// AMD. Use a named plugin in case this</span>
+</span><span class='line'>        <span class="c1">// file is loaded outside an AMD loader,</span>
+</span><span class='line'>        <span class="c1">// but an AMD loader lives on the page.</span>
+</span><span class='line'>        <span class="nx">define</span><span class="p">(</span><span class="s1">&#39;myPlugin&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;jquery&#39;</span><span class="p">],</span> <span class="nx">factory</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Browser globals</span>
+</span><span class='line'>        <span class="nx">factory</span><span class="p">(</span><span class="nx">root</span><span class="p">.</span><span class="nx">jQuery</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}(</span><span class="k">this</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">myPlugin</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'><span class="p">}));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>CommonJS Modules</h3>
+
+<p>They basically contain two parts: an <strong>exports</strong> object that contains the objects a module wishes to expose and a <strong>require</strong> function that modules can use to import the exports of other modules</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="cm">/* here we achieve compatibility with AMD and CommonJS</span>
+</span><span class='line'><span class="cm">using some boilerplate around the CommonJS module format*/</span>
+</span><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">define</span><span class="p">){</span>
+</span><span class='line'>    <span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">){</span>
+</span><span class='line'>        <span class="cm">/*module contents*/</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">dep1</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">dep2</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;bar&quot;</span><span class="p">);</span>
+</span><span class='line'>         <span class="nx">exports</span><span class="p">.</span><span class="nx">hello</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){...};</span>
+</span><span class='line'>         <span class="nx">exports</span><span class="p">.</span><span class="nx">world</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){...};</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="p">})(</span><span class="k">typeof</span> <span class="nx">define</span> <span class="o">==</span> <span class="s2">&quot;function&quot;</span> <span class="o">?</span> <span class="nx">define</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">factory</span><span class="p">)</span> <span class="p">{</span> <span class="nx">factory</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">)</span> <span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2. Facade Pattern</h2>
+
+<p>Convenient, high-level interfaces to larger bodies of code that hide underlying complexity</p>
+
+<h3>Facade Implementation</h3>
+
+<p>A higher-level facade is provided to our underlying module, without directly exposing methods.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">module</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">_private</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">i</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;current value:&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">i</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">set</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">this</span><span class="p">.</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">run</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;running&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="nx">jump</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;jumping&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}};</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">facade</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">_private</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">val</span><span class="p">);</span>
+</span><span class='line'>            <span class="nx">_private</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">run</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">_private</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">}}</span>
+</span><span class='line'><span class="p">}());</span>
+</span><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">facade</span><span class="p">({</span><span class="nx">run</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span><span class="nx">val</span><span class="o">:</span> <span class="mi">10</span><span class="p">});</span> <span class="c1">//outputs current value: 10, running</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>3. Mediator Pattern</h2>
+
+<p>Encapsulates how disparate modules interact with each other by acting as an intermediary</p>
+
+<h3>Mediator Implementation</h3>
+
+<p>One possible implementation, exposing publish and subscribe capabilities.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">mediator</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">subscribe</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">channel</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">mediator</span><span class="p">.</span><span class="nx">channels</span><span class="p">[</span><span class="nx">channel</span><span class="p">])</span> <span class="nx">mediator</span><span class="p">.</span><span class="nx">channels</span><span class="p">[</span><span class="nx">channel</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'>        <span class="nx">mediator</span><span class="p">.</span><span class="nx">channels</span><span class="p">[</span><span class="nx">channel</span><span class="p">].</span><span class="nx">push</span><span class="p">({</span> <span class="nx">context</span><span class="o">:</span> <span class="k">this</span><span class="p">,</span> <span class="nx">callback</span><span class="o">:</span> <span class="nx">fn</span> <span class="p">});</span>
+</span><span class='line'>        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">publish</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">channel</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">mediator</span><span class="p">.</span><span class="nx">channels</span><span class="p">[</span><span class="nx">channel</span><span class="p">])</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">mediator</span><span class="p">.</span><span class="nx">channels</span><span class="p">[</span><span class="nx">channel</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="kd">var</span> <span class="nx">subscription</span> <span class="o">=</span> <span class="nx">mediator</span><span class="p">.</span><span class="nx">channels</span><span class="p">[</span><span class="nx">channel</span><span class="p">][</span><span class="nx">i</span><span class="p">];</span>
+</span><span class='line'>            <span class="nx">subscription</span><span class="p">.</span><span class="nx">callback</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">subscription</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">channels</span><span class="o">:</span> <span class="p">{},</span>
+</span><span class='line'>        <span class="nx">publish</span><span class="o">:</span> <span class="nx">publish</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">subscribe</span><span class="o">:</span> <span class="nx">subscribe</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">installTo</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">obj</span><span class="p">.</span><span class="nx">subscribe</span> <span class="o">=</span> <span class="nx">subscribe</span><span class="p">;</span>
+</span><span class='line'>            <span class="nx">obj</span><span class="p">.</span><span class="nx">publish</span> <span class="o">=</span> <span class="nx">publish</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'><span class="p">}());</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Example</h3>
+
+<p>Usage of the implementation from the last slide.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="c1">//Pub/sub on a centralized mediator</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">mediator</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;tim&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="nx">mediator</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;nameChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">arg</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">mediator</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s1">&#39;nameChange&#39;</span><span class="p">,</span> <span class="s1">&#39;david&#39;</span><span class="p">);</span> <span class="c1">//tim, david</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//Pub/sub via third party mediator</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;sam&#39;</span><span class="p">};</span>
+</span><span class='line'><span class="nx">mediator</span><span class="p">.</span><span class="nx">installTo</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+</span><span class='line'><span class="nx">obj</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;nameChange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">arg</span><span class="p">;</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">obj</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s1">&#39;nameChange&#39;</span><span class="p">,</span> <span class="s1">&#39;john&#39;</span><span class="p">);</span> <span class="c1">//sam, john</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Form http://www.slideshare.net/AddyOsmani/futureproofing-your-javascript-apps-compact-edition</em></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -350,6 +828,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/js-patterns/">JavaScript Design Patterns</a>
+      </li>
     
       <li class="post">
         <a href="/blog/bootstrap/">Installing Rails on  Mac OS X</a>
